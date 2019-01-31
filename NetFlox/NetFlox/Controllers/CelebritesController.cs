@@ -48,5 +48,29 @@ namespace NetFlox.Controllers
 
             return View(celebrite);
         }
+
+        // GET: Celebrities/Search
+        public async Task<IActionResult> Search([FromQuery] string query)
+        {   
+
+            ViewBag.Search=query;
+            if (query == null)
+            {
+                return NotFound();
+            }
+
+            var celebrites = await _context.Celebrites
+                .Where(c => EF.Functions.Like(c.Nom, $"%{query}%"))
+                .ToListAsync();
+
+            if (celebrites == null)
+            {
+                return NotFound();
+            }
+
+            
+
+            return View(celebrites);
+        }
     }
 }

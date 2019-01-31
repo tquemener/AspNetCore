@@ -48,5 +48,28 @@ namespace NetFlox.Controllers
 
             return View(film);
         }
+        // GET: Films/Search
+        public async Task<IActionResult> Search([FromQuery] string query)
+        {   
+        
+            if (query == null)
+            {
+                return NotFound();
+            }
+            
+            var films = await _context.Films
+                .Where(c => EF.Functions.Like(c.Titre, $"%{query}%"))
+                .ToListAsync();
+
+            if (films == null)
+            {
+                return NotFound();
+            }
+            ViewBag.Search=query;
+
+            return View(films);
+        }
     }
+    
+
 }

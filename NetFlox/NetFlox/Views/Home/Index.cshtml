@@ -5,6 +5,17 @@
 <div>
 
 
+    <form asp-controller="Films" asp-action="search" method="get">
+        <label>Rechercher un film</label>
+        <input type="text" name="query" />
+        <button>Rechercher</button>
+    </form>
 
-
+    <form asp-controller="Celebrites" asp-action="search" method="get">
+        <label>Rechercher une célébrité</label>
+        <input type="text" name="query" />
+        <button>Rechercher</button>
+    </form>
+   
 </div>
+
